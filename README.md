@@ -1,74 +1,77 @@
-# React + TypeScript + Vite
+# ⚡ Research Agent
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React](https://img.shields.io/badge/React-19.0-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-8.0-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Chakra UI](https://img.shields.io/badge/Chakra--UI-3.34-319795?logo=chakraui&logoColor=white)](https://chakra-ui.com/)
+[![Gemini](https://img.shields.io/badge/Google--Gemini-2.5--Flash-4285F4?logo=googlegemini&logoColor=white)](https://aistudio.google.com/)
+[![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel&logoColor=white)](https://research-agent-nine-gamma.vercel.app/)
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> **Live Demo**: [research-agent-nine-gamma.vercel.app](https://research-agent-nine-gamma.vercel.app/)
 
-## React Compiler
+A premium, high-performance research assistant interface powered by **Google Gemini**, **LangChain**, and **MCP**. This application provides a seamless, multi-modal chat experience designed for deep analysis, document reasoning, and real-time research.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Key Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🧠 **Multi-Modal Reasoning**: Upload and analyze images, PDFs, text documents, CSVs, JSON, and Word files directly in the chat.
+- ⚡ **Powered by Gemini 2.5**: Choose between Gemini 2.5 Pro (Brain), Flash (Fast), and Flash-Lite (Lightweight) for tailored responses.
+- 🔍 **Real-time Research**: Leveraging advanced agentic workflows to browse and synthesize information from across the web.
+- 🎨 **Premium UI/UX**: Dark-themed, responsive design with glassmorphism, fluid animations (Framer Motion), and intuitive navigation.
+- 🔒 **Session Integrity**: Securely initialize your session with your own API key—keys are never stored on the server.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Technical Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Frontend**: React 19, TypeScript, Vite
+- **Styling**: Chakra UI v3, Framer Motion (Animations)
+- **Content**: React Markdown with GFM support
+- **Backend API**: Hosted LangChain Agent via Hugging Face Space
+- **Core Logic**: Google Gemini API, MCP (Model Context Protocol)
+- **Deployment**: Vercel
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Getting Started
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# ResearchAgent
+### Prerequisites
+
+- **Node.js**: v18.0 or higher
+- **Google AI API Key**: Obtain yours from [Google AI Studio](https://aistudio.google.com/app/apikey).
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Sauravroy34/ResearchAgent.git
+   cd ResearchAgentUI
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## 📖 Usage Guide
+
+1. **Initialization**: On the first launch, enter your **Google API Key** and select your preferred **Gemini Model**.
+2. **Chat**: Start asking questions! You can use the 📎 icon to attach files for analysis.
+
+
+---
+
+## MCP server 
+For more info about the mcp server and backend used check out my this project https://github.com/Sauravroy34/ResearchPaperMCP
+
+
+
