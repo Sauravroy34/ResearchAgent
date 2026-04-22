@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Field,
   Input,
   Spinner,
@@ -12,7 +11,8 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { FiEye, FiEyeOff, FiZap, FiKey, FiCpu } from 'react-icons/fi'
-import { Toaster, toaster } from '../ui/toaster'
+import { Toaster } from '../ui/toaster'
+import { toaster } from '../ui/toaster-instance'
 
 const BACKEND_URL = 'https://Codemaster67-GoolgeLangchainAgent.hf.space'
 
@@ -123,19 +123,19 @@ export default function SetupPage({ onInitialized }: SetupPageProps) {
       `}</style>
 
       {/* Card */}
-      <Box
+      <form
         className="setup-card"
-        as="form"
-        // @ts-ignore
         onSubmit={handleSubmit}
-        w={{ base: '95%', sm: '480px' }}
-        bg="rgba(15, 23, 42, 0.88)"
-        backdropFilter="blur(24px)"
-        border="1px solid rgba(66,133,244,0.25)"
-        borderRadius="24px"
-        p={{ base: '32px', md: '40px' }}
-        position="relative"
-        zIndex={1}
+        style={{
+          width: 'min(95%, 480px)',
+          background: 'rgba(15, 23, 42, 0.88)',
+          backdropFilter: 'blur(24px)',
+          border: '1px solid rgba(66,133,244,0.25)',
+          borderRadius: '24px',
+          padding: 'clamp(32px, 5vw, 40px)',
+          position: 'relative',
+          zIndex: 1,
+        }}
       >
         {/* Brand */}
         <VStack gap={6} mb={8}>
@@ -202,10 +202,16 @@ export default function SetupPage({ onInitialized }: SetupPageProps) {
             </Box>
             <Field.HelperText color="rgba(255,255,255,0.35)" fontSize="11px" mt={1}>
               Get your key from{' '}
-              <Box as="a" href="https://aistudio.google.com/app/apikey" target="_blank"
-                color="#4285F4" _hover={{ color: '#63b3ed', textDecoration: 'underline' }}>
+              <a
+                href="https://aistudio.google.com/app/apikey"
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: '#4285F4', textDecoration: 'none' }}
+                onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = '#63b3ed')}
+                onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = '#4285F4')}
+              >
                 Google AI Studio
-              </Box>
+              </a>
             </Field.HelperText>
           </Field.Root>
 
@@ -217,22 +223,20 @@ export default function SetupPage({ onInitialized }: SetupPageProps) {
                 <Text fontSize="13px" fontWeight="600" color="rgba(255,255,255,0.9)">Select Model</Text>
               </HStack>
             </Field.Label>
-            <Box
-              as="select"
+            <select
               id="model-select"
               value={modelName}
-              // @ts-ignore
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setModelName(e.target.value)}
-              w="full"
-              bg="rgba(255,255,255,0.05)"
-              border="1px solid rgba(255,255,255,0.1)"
-              borderRadius="12px"
-              color="white"
-              fontSize="13px"
-              h="44px"
-              px={4}
-              cursor="pointer"
+              onChange={(e) => setModelName(e.target.value)}
               style={{
+                width: '100%',
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: '12px',
+                color: 'white',
+                fontSize: '13px',
+                height: '44px',
+                padding: '0 16px',
+                cursor: 'pointer',
                 outline: 'none',
                 transition: 'border 0.2s, box-shadow 0.2s',
                 appearance: 'none',
@@ -246,30 +250,32 @@ export default function SetupPage({ onInitialized }: SetupPageProps) {
                   {m.label} — {m.badge}
                 </option>
               ))}
-            </Box>
+            </select>
           </Field.Root>
 
           {/* Submit */}
-          <Box
-            as="button"
+          <button
             type="submit"
             className="launch-btn"
-            w="full"
-            h="48px"
-            mt={2}
-            borderRadius="14px"
-            border="none"
-            cursor={loading ? 'not-allowed' : 'pointer'}
-            background="linear-gradient(135deg, #4285F4 0%, #7C4DFF 100%)"
-            color="white"
-            fontWeight="700"
-            fontSize="14px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            gap="8px"
-            style={{ transition: 'all 0.2s', boxShadow: '0 4px 16px rgba(66,133,244,0.3)' }}
             disabled={loading}
+            style={{
+              width: '100%',
+              height: '48px',
+              marginTop: '8px',
+              borderRadius: '14px',
+              border: 'none',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              background: 'linear-gradient(135deg, #4285F4 0%, #7C4DFF 100%)',
+              color: 'white',
+              fontWeight: 700,
+              fontSize: '14px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              transition: 'all 0.2s',
+              boxShadow: '0 4px 16px rgba(66,133,244,0.3)',
+            }}
           >
             {loading ? (
               <HStack gap={2}>
@@ -279,13 +285,13 @@ export default function SetupPage({ onInitialized }: SetupPageProps) {
             ) : (
               '🚀 Launch Agent'
             )}
-          </Box>
+          </button>
         </VStack>
 
         <Text color="rgba(255,255,255,0.25)" fontSize="11px" textAlign="center" mt={5}>
           Your API key is never stored — only used to initialize the agent session.
         </Text>
-      </Box>
+      </form>
     </Box>
   )
 }

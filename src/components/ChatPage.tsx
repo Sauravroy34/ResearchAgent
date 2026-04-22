@@ -13,7 +13,8 @@ import { useState, useRef, useEffect } from 'react'
 import { FiSend, FiPaperclip, FiFile, FiImage, FiX, FiMessageSquare, FiZap, FiTrash2, FiLogOut } from 'react-icons/fi'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { Toaster, toaster } from '../ui/toaster'
+import { Toaster } from '../ui/toaster'
+import { toaster } from '../ui/toaster-instance'
 
 const BACKEND_URL = 'https://Codemaster67-GoolgeLangchainAgent.hf.space'
 
@@ -498,23 +499,31 @@ export default function ChatPage({ onLogout }: ChatPageProps) {
             {isLoading ? (
               <Spinner size="sm" color="#4285F4" />
             ) : (
-              <Box
-                as="button"
+              <button
                 id="send-btn"
                 className="send-btn"
                 title="Send (Enter)"
-                cursor={!input.trim() && !file ? 'not-allowed' : 'pointer'}
-                border="none"
-                w="34px" h="34px" borderRadius="10px" flexShrink={0}
-                background={input.trim() || file ? 'linear-gradient(135deg, #4285F4, #7C4DFF)' : 'rgba(255,255,255,0.08)'}
-                color={input.trim() || file ? 'white' : 'rgba(255,255,255,0.3)'}
-                display="flex" alignItems="center" justifyContent="center"
-                style={{ transition: 'all 0.15s', boxShadow: input.trim() || file ? '0 4px 12px rgba(66,133,244,0.3)' : 'none' }}
-                onClick={sendMessage}
+                type="button"
                 disabled={!input.trim() && !file}
+                onClick={sendMessage}
+                style={{
+                  cursor: !input.trim() && !file ? 'not-allowed' : 'pointer',
+                  border: 'none',
+                  width: '34px',
+                  height: '34px',
+                  borderRadius: '10px',
+                  flexShrink: 0,
+                  background: input.trim() || file ? 'linear-gradient(135deg, #4285F4, #7C4DFF)' : 'rgba(255,255,255,0.08)',
+                  color: input.trim() || file ? 'white' : 'rgba(255,255,255,0.3)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.15s',
+                  boxShadow: input.trim() || file ? '0 4px 12px rgba(66,133,244,0.3)' : 'none',
+                }}
               >
                 <Icon fontSize="15px"><FiSend /></Icon>
-              </Box>
+              </button>
             )}
           </HStack>
           <Text fontSize="10px" color="rgba(255,255,255,0.25)" textAlign="center" mt={2}>
