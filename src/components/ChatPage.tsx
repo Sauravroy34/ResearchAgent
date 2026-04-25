@@ -18,6 +18,7 @@ import { toaster } from '../ui/toaster-instance'
 
 const BACKEND_URL = 'https://Codemaster67-GoolgeLangchainAgent.hf.space'
 
+
 interface Message {
   id: string
   role: 'user' | 'assistant'
@@ -187,6 +188,7 @@ export default function ChatPage({ onLogout }: ChatPageProps) {
     try {
       const formData = new FormData()
       formData.append('message', currentInput.trim() || 'Please analyze this file.')
+      formData.append('session_id', sessionId)
       if (currentFile) formData.append('file', currentFile)
 
       const res = await fetch(`${BACKEND_URL}/chat`, { method: 'POST', body: formData })
