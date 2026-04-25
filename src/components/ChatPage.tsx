@@ -158,6 +158,25 @@ export default function ChatPage({ onLogout }: ChatPageProps) {
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
+  useEffect(() => {
+    const clearSession = () => {
+      if (!sessionId) return
+      
+      fetch(`${BACKEND_URL}/session/${sessionId}`, {
+        method: 'DELETE',
+        keepalive: true
+      }).catch(err => console.error('Failed to clear session:', err))
+    }
+
+    window.addEventListener('beforeunload', clearSession)
+
+    return () => {
+      window.removeEventListener('beforeunload', clearSession)
+      clearSession()
+    }
+  }, [sessionId])
+
+
   const sendMessage = async () => {
     if (!input.trim() && !file) return
 
