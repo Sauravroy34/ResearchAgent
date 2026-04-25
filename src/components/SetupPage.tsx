@@ -53,6 +53,7 @@ export default function SetupPage({ onInitialized }: SetupPageProps) {
       formData.append('model_name', modelName)
       const res = await fetch(`${BACKEND_URL}/initialize`, { method: 'POST', body: formData })
       const data = await res.json()
+
       if (!res.ok) throw new Error(data.detail || 'Initialization failed')
       toaster.create({ title: 'Agent Initialized!', description: data.message || `Agent ready with ${modelName}`, type: 'success' })
       onInitialized()
